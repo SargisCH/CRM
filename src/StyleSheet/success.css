@@ -1,0 +1,41 @@
+.success{
+	position: fixed;
+	left: 0; 
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: rgba(44, 44, 55, 0.4);
+	display: flex
+}
+.success_message{
+    width: 300px;
+    height: 150px;
+    background: rgba(44, 44, 55, 0.9);
+	margin: auto auto;
+	color: #F9F4F5;
+	text-align: center;
+	padding: 5px;
+	display: flex;
+	
+}
+.success_text{
+	margin-top: 15px;
+}
+.successContainer{
+	margin: auto auto;
+}
+.success_confirm{
+	width: 100px;
+	text-align: center;
+	box-shadow: 0 0px 0px 0 rgba(40, 47, 71,0.4);
+	margin: 25px auto;
+	color: #1A1F25;
+    background-color: #F9F4F5;
+	font-weight: bold;
+	border-radius: .1rem;
+	border: 0.5px solid transparent;
+}
+.success_confirm:hover{
+	background: #a9a9a9;
+	cursor: pointer
+}
