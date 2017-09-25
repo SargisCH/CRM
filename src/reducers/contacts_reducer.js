@@ -1,4 +1,4 @@
-import {GET_CONTACTS} from '../constants';
+import {GET_CONTACTS, ADD_CONTACT} from '../constants';
 
 export default function contactsReducer (state={
     contacts: []
@@ -8,6 +8,12 @@ export default function contactsReducer (state={
             return {
                 ...state,
                 contacts: action.contacts
+            }
+        }
+        case ADD_CONTACT: {
+            return {
+                ...state,
+                contacts: [...state.contacts, action.newContact]
             }
         }
         default: {

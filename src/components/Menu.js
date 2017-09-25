@@ -5,13 +5,13 @@ export default function Menu ({menuIsOpen}) {
         <div className={menuIsOpen ? "open menu" : "menu" }>
         <ul className="list_menu">
           <li className="menu_item">
-            <a activeClassName="active" to='/contacts'>
+            <a>
                Contacts  
               <i className="activeMenuIcon fa fa-caret-left"></i>
             </a>
           </li>
           <li className="menu_item">
-            <a activeClassName="active" to='/mailingList'>
+            <a >
               Mailing Lists
               <i className="activeMenuIcon fa fa-caret-left"></i>
             </a>
@@ -20,3 +20,13 @@ export default function Menu ({menuIsOpen}) {
       </div>
     )
 }
+/*
+activeClassName="active" to='/contacts'
+activeClassName="active" to='/mailingList'
+
+a tegeri vrinna 
+*/
+
+
+
+
