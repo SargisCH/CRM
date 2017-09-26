@@ -153,7 +153,6 @@ input[type="radio"]:checked+span{
 	background: #1A1F25;
 }
 .mailing_list_form{
-	background: rgba(44, 44, 55, 0.9);
 	width: 400px;
 	height: 200px;
 	margin: auto auto;
@@ -165,12 +164,12 @@ input[type="radio"]:checked+span{
     background-color: #F9F4F5;
 	font-weight: bold;
 	height: 25px;
-    border-radius: .1rem;
+    border-radius: 1px;
 	cursor:pointer;
 	padding: 1%;
 	margin-top: 11%;
 	box-sizing: border-box;
-	outline: none;
+	border: none;
 	width: 47.5%;
 	margin-left: 0;
 }
@@ -284,8 +283,6 @@ input[type="radio"]:checked+span{
 	line-height: 2; 
 }
 .add_new_contact_form{
-	background: rgba(44, 44, 55, 0.9);
-	color: azure;
 	width: 400px;
 	margin: auto auto;
 	height: 300px;

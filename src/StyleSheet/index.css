@@ -22,7 +22,7 @@ main{
     float: left;
 	margin-left:15%;
 	margin-top:61px;
-    }
+}
 a{
     display: block;
     height: 100%;
@@ -30,7 +30,24 @@ a{
     text-decoration: none;
     
 }
-
+.popup_container{
+    position:fixed;
+    left:0;
+    top: 0;
+    bottom:0;
+    width: 100%;
+    display: flex;
+    background-color: rgba(44,44,55,0.4)
+}
+.popup_content{
+    background-color: rgba(44,44,55,0.9);
+    color: azure;
+    width: 400px;
+    margin: auto auto;
+    height: 300px;
+    box-sizing: border-box;
+    display:flex;
+}
  
 @media (max-width:1030px) {
 

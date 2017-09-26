@@ -3,14 +3,16 @@ import { connect } from 'react-redux';
 import { getContacts, addContacts } from '../actions/contactsActions'
 import ContactsListItem from '../components/ContactsListItem';
 import AddContactButton from '../components/AddContatcButton';
-import Popup from '../components/Popup';
-import {TOGGLE_ADD_CONTACTS_FORM} from '../constants';
-
-
+import Popup from './../components/popup/Popup';
+import AddComponentPopup from '../components/popup/AddComponentPopup';
+import CreateMailingListPopup from '../components/popup/CreateMailingListPopup';
+import CreateMailingListButton from '../components/CreateMailingListButton';
+import {createMailingList} from '../actions/mailingListActions';
 class Contacts extends Component {
     constructor(props) {
         super(props);
         this.addContact = this.addContact.bind(this);
+        this.createMailingList = this.createMailingList.bind(this);
     }
     componentDidMount() {
         this.props.dispatch(getContacts())
@@ -21,20 +23,21 @@ class Contacts extends Component {
             return <ContactsListItem key={item.GuID} contact={item} />
         })
     }
-    addContact(e){
-        console.log('sadasdsad')
-        e.preventDefault()
-        if(this.firstname.value !== '' && this.lastname.value !== '' && this.companyName.value !== '' 
-        && this.position.value !== '' && this.email.value !== '' ){
+    addContact( firstname,lastname,position,companyName, country, email){
+        if(firstname.value !== '' && lastname.value !== '' && companyName.value !== '' 
+        && position.value !== '' && email.value !== '' ){
             let newContact = {
-                FullName: this.firstname.value + " " + this.lastname.value,
-                CompanyName: this.companyName.value,
-                Position: this.position.value,
-                Email: this.email.value,
-                Country: this.country.value
+                FullName: firstname.value + " " + lastname.value,
+                CompanyName: companyName.value,
+                Position: position.value,
+                Email: email.value,
+                Country: country.value
             };
             this.props.dispatch(addContacts(newContact))
         }
+    }
+    createMailingList (mailingListName) {
+        this.props.dispatch(createMailingList(mailingListName))
     }
     render() {
         return (
@@ -57,39 +60,19 @@ class Contacts extends Component {
                 </table>
                 <div className="buttons">
                     <AddContactButton dispatch={this.props.dispatch} />
-
+                    <CreateMailingListButton dispatch={this.props.dispatch}/>
                 </div>
+
                 {this.props.addContactFormIsOpen &&
-                    <Popup addContactFormIsOpen={this.props.addContactFormIsOpen}>
-                        <div className="add_new_contact_form_container block">
-                            <form  onSubmit={this.addContact} className="add_new_contact_form" action="" >
-                                <div className="add_contact_content">
-                                    <label htmlFor="first_name">
-                                        <span className="add_contact_value">First name: </span> <input className="add_input" ref={(ref) => this.firstname=ref} id="first_name" type="text" required />
-                                    </label><br />
-                                    <label htmlFor="last_name">
-                                        <span className="add_contact_value">Last name:</span> <input className="add_input" ref={(ref) => this.lastname=ref} id="last_name" type="text" required />
-                                    </label><br />
-                                    <label htmlFor="company_name">
-                                        <span className="add_contact_value">Company name:</span> <input className="add_input" ref={(ref) => this.companyName=ref} id="company_name" type="text" required />
-                                    </label><br />
-                                    <label htmlFor="position">
-                                        <span className="add_contact_value">Position:</span> <input className="add_input" ref={(ref) => this.position=ref} id="position" type="text" required />
-                                    </label><br />
-                                    <label htmlFor="country">
-                                        <span className="add_contact_value">Country:</span> <input className="add_input" ref={(ref) => this.country=ref} id="country" type="text" required />
-                                    </label><br />
-                                    <label htmlFor="email">
-                                        <span className="add_contact_value">Email:</span> <input className="add_input" ref={(ref) => this.email=ref} id="email" type="email" required />
-                                    </label><br />
-                                    <input className='btn_table add_btn' id="add_submit" type="submit" defaultValue="Add" />
-                                    <input type="button" className="add_btn" defaultValue="Cancel" onClick={() => this.props.dispatch({type: TOGGLE_ADD_CONTACTS_FORM, toggle: false})} id="add_cancel" />
-                                </div>
-                            </form>
-                        </div>
+                    <Popup >
+                        {<AddComponentPopup addContact={this.addContact} dispatch={this.props.dispatch}/>}    
                     </Popup>
                 }
-
+                {this.props.createMailingListFormIsOpen &&
+                    <Popup >
+                        {<CreateMailingListPopup createMailingList={this.createMailingList} dispatch={this.props.dispatch}/>}    
+                    </Popup>
+                }
             </div>
         )
     }
@@ -99,7 +82,8 @@ class Contacts extends Component {
 function mapStateToProps(state) {
     return {
         contacts: state.contactsReducer.contacts,
-        addContactFormIsOpen: state.UI.addContactFormIsOpen
+        addContactFormIsOpen: state.UI.addContactFormIsOpen,
+        createMailingListFormIsOpen: state.UI.createMailingListFormIsOpen
     }
 }
 
