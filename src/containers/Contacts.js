@@ -8,6 +8,7 @@ import AddComponentPopup from '../components/popup/AddComponentPopup';
 import CreateMailingListPopup from '../components/popup/CreateMailingListPopup';
 import CreateMailingListButton from '../components/CreateMailingListButton';
 import {createMailingList} from '../actions/mailingListActions';
+import ResponseMessage from '../components/popup/ResponseMessage'
 class Contacts extends Component {
     constructor(props) {
         super(props);
@@ -73,6 +74,9 @@ class Contacts extends Component {
                         {<CreateMailingListPopup createMailingList={this.createMailingList} dispatch={this.props.dispatch}/>}    
                     </Popup>
                 }
+                {this.props.responseMessage &&
+                    <ResponseMessage  responseMessage={this.props.responseMessage}/>
+                }
             </div>
         )
     }
@@ -83,7 +87,8 @@ function mapStateToProps(state) {
     return {
         contacts: state.contactsReducer.contacts,
         addContactFormIsOpen: state.UI.addContactFormIsOpen,
-        createMailingListFormIsOpen: state.UI.createMailingListFormIsOpen
+        createMailingListFormIsOpen: state.UI.createMailingListFormIsOpen,
+        responseMessage: state.UI.responseMessage
     }
 }
 

@@ -1,5 +1,6 @@
 import {
-    TOGGLE_MAILING_LIST_FORM
+    TOGGLE_MAILING_LIST_FORM,
+    CREATE_MAILING_LIST
 } from '../constants';
 
 export function toggleMailingListForm(toggle) {
@@ -9,7 +10,6 @@ export function toggleMailingListForm(toggle) {
     }
 }
 export const createMailingList = (mailingListName) => (dispatch) => {
-    console.log(mailingListName)
     fetch('http://crmbetc.azurewebsites.net/api/emaillists', {
         method: "POST",
         headers: {
@@ -21,5 +21,5 @@ export const createMailingList = (mailingListName) => (dispatch) => {
         if (response.ok) {
             return response.json();
         }
-    }).then(res => console.log(res))
+    }).then(res => dispatch({type: CREATE_MAILING_LIST, responseMessage: "Mailing List has been created"}))
 }
