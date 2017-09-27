@@ -55,24 +55,6 @@ a {
     display: flex;
 }
 
-/* .response_message_container {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    background-color: rgba(44, 44, 55, 0.4)
-}
-
-.response_message_content {
-    background-color: rgba(44, 44, 55, 0.9);
-    color: azure;
-    width: 400px;
-    margin: auto auto;
-    height: 300px;
-    display: flex
-} */
 
 .response_message_content  {
     margin: auto auto;
@@ -88,6 +70,10 @@ a {
 
 .clear {
     clear: both;
+}
+
+.edit_button {
+    cursor: pointer;
 }
 
 @media (max-width:1030px) {

@@ -1,6 +1,7 @@
 import React from 'react';
+import {toggleEditContactForm} from '../actions/contactsActions'
 
-export default function ContactsListItem ({contact}){
+export default function ContactsListItem ({contact, dispatch, index}){
      return (
         <tr>
             <td><input type="checkbox"/></td>
@@ -9,7 +10,7 @@ export default function ContactsListItem ({contact}){
             <td>{contact["Position"]}</td>
             <td>{contact["Country"]}</td>
             <td>{contact["Email"]}</td>
-            <td>Edit</td>
+            <td className="edit_button" onClick={() => dispatch(toggleEditContactForm(true, index))}>Edit</td>
         </tr>
     )
 }

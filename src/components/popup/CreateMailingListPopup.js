@@ -5,8 +5,9 @@ export default function CreateMailingListPopup({dispatch, createMailingList}) {
     let mailingListName;
     function submit(e){
         e.preventDefault();
-        console.log(mailingListName)
         createMailingList(mailingListName);
+        dispatch(toggleMailingListForm(false))
+
     }
     return (
             <form onSubmit={submit} className="mailing_list_form">
