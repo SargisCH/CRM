@@ -40,7 +40,7 @@ export const toggleEditContactForm = (toggle, index) => {
 
 export const  editContact = ( editContact) => dispatch => {
     fetch('http://crmbetc.azurewebsites.net/api/contacts',{
-        method: "post",
+        method: "put",
         headers: {'Accept': 'application/json','Content-Type': "application/json"},
         body : JSON.stringify(editContact),
     }).then(res => res.json()).then( updatedContact => {

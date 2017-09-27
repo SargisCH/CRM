@@ -75,10 +75,28 @@ a {
 .edit_button {
     cursor: pointer;
 }
+.return{
+    height: 100%
+}
 
 @media (max-width:1030px) {
     main {
         width: 100%;
         margin-left: 0;
     }
+}
+.menu {
+    float: left;
+    height: 100%;
+    margin-top: 60px;
+    background: #2C2C37;
+    width: 150px;
+}
+.menu_button{
+    height: 50px;
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 20px;
+    color: white;
+    cursor: pointer;
 }

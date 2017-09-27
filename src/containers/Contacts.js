@@ -2,19 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getContacts, addContacts, editContact } from '../actions/contactsActions'
 import ContactsListItem from '../components/ContactsListItem';
-import AddContactButton from '../components/AddContatcButton';
 import Popup from './../components/popup/Popup';
 import AddComponentPopup from '../components/popup/AddComponentPopup';
-import CreateMailingListPopup from '../components/popup/CreateMailingListPopup';
-import CreateMailingListButton from '../components/CreateMailingListButton';
-import {createMailingList} from '../actions/mailingListActions';
-import ResponseMessage from '../components/popup/ResponseMessage'
 import EditContactPopup from '../components/popup/EditContactPopup'
 class Contacts extends Component {
     constructor(props) {
         super(props);
         this.addContact = this.addContact.bind(this);
-        this.createMailingList = this.createMailingList.bind(this);
         this.editContact = this.editContact.bind(this);
     }
     componentDidMount() {
@@ -53,9 +47,6 @@ class Contacts extends Component {
             this.props.dispatch(editContact(editedContacts))
         }
     }
-    createMailingList (mailingListName) {
-        this.props.dispatch(createMailingList(mailingListName));
-    }
     render() {
         return (
             <div className="TableContainer">
@@ -75,23 +66,10 @@ class Contacts extends Component {
                         {this.renderContacts()}
                     </tbody>
                 </table>
-                <div className="buttons">
-                    <AddContactButton dispatch={this.props.dispatch} />
-                    <CreateMailingListButton dispatch={this.props.dispatch}/>
-                </div>
-
                 {this.props.addContactFormIsOpen &&
                     <Popup >
                         {<AddComponentPopup addContact={this.addContact} dispatch={this.props.dispatch}/>}    
                     </Popup>
-                }
-                {this.props.createMailingListFormIsOpen &&
-                    <Popup >
-                        {<CreateMailingListPopup createMailingList={this.createMailingList} dispatch={this.props.dispatch}/>}    
-                    </Popup>
-                }
-                {this.props.responseMessage &&
-                    <ResponseMessage  dispatch={this.props.dispatch} responseMessage={this.props.responseMessage}/>
                 }
                 {this.props.editFormIsOpen &&
                 <Popup>
@@ -107,11 +85,10 @@ class Contacts extends Component {
 function mapStateToProps(state) {
     return {
         contacts: state.contactsReducer.contacts,
-        addContactFormIsOpen: state.UI.addContactFormIsOpen,
-        createMailingListFormIsOpen: state.UI.createMailingListFormIsOpen,
-        responseMessage: state.UI.responseMessage,
         editObject: state.contactsReducer.editObject,
-        editFormIsOpen: state.UI.editFormIsOpen
+        addContactFormIsOpen: state.UI.addContactFormIsOpen,
+        editFormIsOpen: state.UI.editFormIsOpen,
+        editObject: state.contactsReducer.editObject,
     }
 }
 

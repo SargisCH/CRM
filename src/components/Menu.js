@@ -1,17 +1,17 @@
 import React, {Component}  from 'react';
  
-export default function Menu ({menuIsOpen}) {
+export default function Menu () {
     return (
-        <div className={menuIsOpen ? "open menu" : "menu" }>
+        <div className="open menu" >
         <ul className="list_menu">
           <li className="menu_item">
-            <a>
+            <a className="menu_button">
                Contacts  
               <i className="activeMenuIcon fa fa-caret-left"></i>
             </a>
           </li>
           <li className="menu_item">
-            <a >
+            <a className="menu_button">
               Mailing Lists
               <i className="activeMenuIcon fa fa-caret-left"></i>
             </a>
