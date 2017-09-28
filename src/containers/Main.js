@@ -3,12 +3,12 @@ import {connect} from 'react-redux';
 import Contacts from './Contacts';
 import Header from '../components/Header';
 import Menu from '../components/Menu';
-import AddContactButton from '../components/AddContatcButton';
+
 import Popup from './../components/popup/Popup';
 import CreateMailingListPopup from '../components/popup/CreateMailingListPopup';
-import CreateMailingListButton from '../components/CreateMailingListButton';
 import {createMailingList} from '../actions/mailingListActions';
-import ResponseMessage from '../components/popup/ResponseMessage'
+import ResponseMessage from '../components/popup/ResponseMessage';
+import MailingLists from "./MailingLists"
 
  class Main extends Component{
      constructor(props){
@@ -23,12 +23,11 @@ import ResponseMessage from '../components/popup/ResponseMessage'
             <div className="global_container">
                 <div  className="return ">
                     <Header/>
-                    <Menu menuIsOpen={true}/>
-                    <Contacts/>
-                    <div className="buttons">
-                    <AddContactButton dispatch={this.props.dispatch} />
-                    <CreateMailingListButton dispatch={this.props.dispatch}/>
-                </div>
+                    <Menu menuIsOpen={true} dispatch={this.props.dispatch}/>
+                    {
+                        !this.props.mailingListsIsOpen ?   <Contacts/> : <MailingLists/>
+                    }
+                
 
                 {this.props.createMailingListFormIsOpen &&
                     <Popup >
@@ -50,6 +49,7 @@ function mapStateToProps (state){
         menuIsOpen: state.UI.menuIsOpen,
         createMailingListFormIsOpen: state.UI.createMailingListFormIsOpen,
         responseMessage: state.UI.responseMessage,
+        mailingListsIsOpen: state.UI.mailingListsIsOpen
     }
 }
 

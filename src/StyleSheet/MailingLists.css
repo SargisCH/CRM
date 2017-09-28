@@ -19,6 +19,8 @@
 }
 .mailinglist_table_container{
     height: 90%;
+    float: left;
+    margin-top: 75px;
 }
 .mailingListName span,.icon{
     cursor: pointer;
@@ -35,7 +37,7 @@
 .choose_mailing_list{
     width: 22%;
     float: left;
-    margin-top: 5px;
+    margin-top: 75px;
     margin-left: 1%; 
     height: 90%;
 }

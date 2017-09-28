@@ -4,7 +4,9 @@ import { getContacts, addContacts, editContact } from '../actions/contactsAction
 import ContactsListItem from '../components/ContactsListItem';
 import Popup from './../components/popup/Popup';
 import AddComponentPopup from '../components/popup/AddComponentPopup';
-import EditContactPopup from '../components/popup/EditContactPopup'
+import EditContactPopup from '../components/popup/EditContactPopup';
+import AddContactButton from '../components/AddContatcButton';
+import CreateMailingListButton from '../components/CreateMailingListButton';
 class Contacts extends Component {
     constructor(props) {
         super(props);
@@ -66,6 +68,11 @@ class Contacts extends Component {
                         {this.renderContacts()}
                     </tbody>
                 </table>
+                <div className="buttons">
+                    <AddContactButton dispatch={this.props.dispatch} />
+                    <CreateMailingListButton dispatch={this.props.dispatch}/>
+                </div>
+                
                 {this.props.addContactFormIsOpen &&
                     <Popup >
                         {<AddComponentPopup addContact={this.addContact} dispatch={this.props.dispatch}/>}    
@@ -76,6 +83,7 @@ class Contacts extends Component {
                     <EditContactPopup editContact={this.editContact}  dispatch={this.props.dispatch} editObject={this.props.editObject}/>
                 </Popup>
                 }
+
             </div>
         )
     }
@@ -88,7 +96,7 @@ function mapStateToProps(state) {
         editObject: state.contactsReducer.editObject,
         addContactFormIsOpen: state.UI.addContactFormIsOpen,
         editFormIsOpen: state.UI.editFormIsOpen,
-        editObject: state.contactsReducer.editObject,
+    
     }
 }
 

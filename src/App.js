@@ -6,6 +6,7 @@ import './StyleSheet/Header.css';
 import './StyleSheet/Table.css';
 import './StyleSheet/index.css';
 import './StyleSheet/success.css';
+import './StyleSheet/MailingLists.css';
 
 
 
