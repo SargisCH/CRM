@@ -92,6 +92,19 @@ a {
     background: #2C2C37;
     width: 150px;
 }
+
+.mailing_lists_to_choose{
+    text-align: center;
+    width: 100%;
+    margin-top: 60px;
+    line-height: 20px;
+}
+.mailing_list_to_choose_item{
+    cursor: pointer;
+}
+.cancel_mailing_list_choose{
+    float:  right
+}
 .menu_button{
     height: 50px;
     text-align: center;

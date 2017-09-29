@@ -5,7 +5,8 @@ import {
     GET_MAILING_LISTS,
     SET_ACTIVE_MAILING_LIST,
     DELETE_MAILING_LIST,
-    DELETE_MAILING_LIST_CONTACTS
+    DELETE_MAILING_LIST_CONTACTS,
+    TOGGLE_MAILING_LIST_TO_CHOOSE
 } from '../constants';
 
 export function toggleMailingListForm(toggle) {
@@ -13,22 +14,6 @@ export function toggleMailingListForm(toggle) {
         type: TOGGLE_MAILING_LIST_FORM,
         toggle
     }
-};
-export const  deleteMailingListContacts = (activeMailingListContacts, guids) => dispatch => {
-    fetch('http://crmbetc.azurewebsites.net/api/contacts', {
-        method: "DELETE",
-        headers: {'Accept': 'application/json', 'Content-Type': "application/json"},
-        body: JSON.stringify(guids),
-    }).then(response => {
-        if (response.ok) {
-            dispatch({
-                type: DELETE_MAILING_LIST_CONTACTS,
-                activeMailingListContacts,
-                guids
-
-            })
-        }
-    });
 };
 export const createMailingList = (mailingListName) => (dispatch) => {
     fetch('http://crmbetc.azurewebsites.net/api/emaillists', {
@@ -76,11 +61,41 @@ export const setActiveMailingList = (id) => (dispatch) => {
     )
 };
 
-export const deleteMailingList = (id,index) => (dispatch) => {
+export const deleteMailingList = (id, index) => (dispatch) => {
     fetch(`http://crmbetc.azurewebsites.net/api/emaillists?id=${id}`, {
-            method: "DELETE"
-        }).then(res => res.ok && dispatch({
-            type: DELETE_MAILING_LIST,
-            index
-        }))
+        method: "DELETE"
+    }).then(res => res.ok && dispatch({
+        type: DELETE_MAILING_LIST,
+        index
+    }))
 };
+
+export const toggleMailingListsToChoose = (toggle) => (dispatch) => {
+    fetch('http://crmbetc.azurewebsites.net/api/emaillists').then(res => res.json()).then(res => {
+        dispatch({
+            type: GET_MAILING_LISTS,
+            mailingLists: res,
+        })
+        dispatch({
+            type: TOGGLE_MAILING_LIST_TO_CHOOSE,
+            toggle
+        })
+    })
+}
+
+export const addToMailingList = (id, data, mailingListName) => (dispatch) => {
+    fetch('http://crmbetc.azurewebsites.net/api/emaillists/update?id=' + id + '&flag=true', {
+        method: "PUT",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': "application/json"
+        },
+        body: JSON.stringify(data)
+    }).then(res=>  
+        dispatch({
+            type: TOGGLE_MAILING_LIST_TO_CHOOSE,
+            toggle: false,
+            responseMessage: `Contacts is added to mailing list ${mailingListName}`
+        })
+    )
+}

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MailingListContactsItem from '../components/MailingListContactsItem'
-import DeleteContacts from '../components/DeleteContacts';
 class MailingListContacts extends Component {
      renderMailingListContacts(){
         return this.props.activeMailingListContacts.map((item,index)=>{
@@ -28,7 +27,6 @@ class MailingListContacts extends Component {
                                 {this.renderMailingListContacts()}
                             </tbody>
                         </table>
-                        <DeleteContacts dispatch={this.props.dispatch} contacts={this.props.activeMailingListContacts} guids={this.props.guids}/>
                     </div>
             </div> 
         )

@@ -2,7 +2,7 @@ import {
         TOGGLE_ADD_CONTACTS_FORM, TOGGLE_MAILING_LIST_FORM, 
         CREATE_MAILING_LIST, CLOSE_RESPONSE_MESSAGE, ADD_CONTACT,
         TOGGLE_EDIT_CONTACTS_FORM, EDIT_CONTACT, MAILING_LISTS,
-        SET_ACTIVE_MAILING_LIST
+        SET_ACTIVE_MAILING_LIST, TOGGLE_MAILING_LIST_TO_CHOOSE
     } from '../constants'
 
 export default function UI_Reducer(state={
@@ -12,7 +12,8 @@ export default function UI_Reducer(state={
     responseMessage: false,
     editFormIsOpen: false,
     mailingListsIsOpen: false,
-    mailingListContactsIsOpen: false
+    mailingListContactsIsOpen: false,
+    mailingListsToChooseIsOpen: false
 }, action){
     switch(action.type){
         case TOGGLE_ADD_CONTACTS_FORM: {
@@ -66,10 +67,16 @@ export default function UI_Reducer(state={
             }
         }
         case SET_ACTIVE_MAILING_LIST : {
-            console.log(state.mailingListContactsIsOpen)
             return {
                 ...state,
                 mailingListContactsIsOpen: true
+            }
+        }
+        case TOGGLE_MAILING_LIST_TO_CHOOSE : {
+            return {
+                ...state,
+                mailingListsToChooseIsOpen: action.toggle,
+                responseMessage: action.responseMessage
             }
         }
         default: {

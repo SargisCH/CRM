@@ -7,7 +7,9 @@ import AddComponentPopup from '../components/popup/AddComponentPopup';
 import EditContactPopup from '../components/popup/EditContactPopup';
 import AddContactButton from '../components/AddContatcButton';
 import CreateMailingListButton from '../components/CreateMailingListButton';
-import DeleteContacts from '../components/DeleteContacts'
+import DeleteContacts from '../components/DeleteContacts';
+import AddToMailingListButton  from '../components/AddToMailingListButton';
+import MailingListsToChoosePopup  from '../components/popup/MailingListsToChoosePopup'
 class Contacts extends Component {
     constructor(props) {
         super(props);
@@ -73,6 +75,7 @@ class Contacts extends Component {
                     <AddContactButton dispatch={this.props.dispatch} />
                     <CreateMailingListButton dispatch={this.props.dispatch}/>
                     <DeleteContacts dispatch={this.props.dispatch} contacts={this.props.contacts} guids={this.props.guids}/>
+                    <AddToMailingListButton dispatch={this.props.dispatch}/>
                 </div>
                 
                 {this.props.addContactFormIsOpen &&
@@ -83,6 +86,11 @@ class Contacts extends Component {
                 {this.props.editFormIsOpen &&
                 <Popup>
                     <EditContactPopup editContact={this.editContact}  dispatch={this.props.dispatch} editObject={this.props.editObject}/>
+                </Popup>
+                }
+                {this.props.mailingListsToChooseIsOpen &&
+                <Popup>
+                    <MailingListsToChoosePopup guids={this.props.guids} mailingLists={this.props.mailingLists}  dispatch={this.props.dispatch}/>
                 </Popup>
                 }
 
@@ -98,7 +106,9 @@ function mapStateToProps(state) {
         editObject: state.contactsReducer.editObject,
         addContactFormIsOpen: state.UI.addContactFormIsOpen,
         editFormIsOpen: state.UI.editFormIsOpen,
-        guids: state.contactsReducer.guids
+        guids: state.contactsReducer.guids,
+        mailingLists: state.mailingListsReducer.mailingLists,
+        mailingListsToChooseIsOpen: state.UI.mailingListsToChooseIsOpen
 
     }
 }
