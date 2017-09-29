@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { getMailingLists } from '../actions/mailingListActions'
 import MailingListsItem from '../components/MailingListsItem';
-import MailingListsContacts from './MailingListContacts.js'
+import MailingListContacts from './MailingListContacts.js'
+
 class MailingLists extends Component {
     componentDidMount() {
         this.props.dispatch(getMailingLists());
@@ -26,7 +27,7 @@ class MailingLists extends Component {
                     </div>
                 </div> 
                     {
-                        this.props.mailingListContactsIsOpen && <MailingListsContacts />
+                        this.props.mailingListContactsIsOpen && <MailingListContacts />
                     }
             </div>
         )

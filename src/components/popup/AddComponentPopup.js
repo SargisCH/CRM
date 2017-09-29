@@ -22,7 +22,7 @@ export default function AddComponentPopup({ addContact,dispatch }) {
                     <span className="add_contact_value">Last name:</span> <input className="add_input" ref={(ref) => lastname = ref} id="last_name" type="text" required />
                 </label><br />
                 <label htmlFor="company_name">
-                    <span className="add_contact_value">Company name:</span> <input className="add_input" ref={(ref) => companyName = ref} id="company_name" type="text" required />
+                    <span className="add_contact_value">Company:</span> <input className="add_input" ref={(ref) => companyName = ref} id="company_name" type="text" required />
                 </label><br />
                 <label htmlFor="position">
                     <span className="add_contact_value">Position:</span> <input className="add_input" ref={(ref) => position = ref} id="position" type="text" required />

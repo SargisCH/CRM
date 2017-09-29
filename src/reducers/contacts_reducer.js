@@ -1,9 +1,10 @@
-import {GET_CONTACTS, ADD_CONTACT, TOGGLE_EDIT_CONTACTS_FORM, EDIT_CONTACT} from '../constants';
+import {GET_CONTACTS, ADD_CONTACT, TOGGLE_EDIT_CONTACTS_FORM, EDIT_CONTACT, COLLECT_GUIDS, DELETE_CONTACTS} from '../constants';
 
 export default function contactsReducer (state={
     contacts: [],
     editObject: {},
-    indexOfEditObject: ''
+    indexOfEditObject: '',
+    guids: []
 }, action){
     switch(action.type){
         case GET_CONTACTS: {
@@ -32,6 +33,28 @@ export default function contactsReducer (state={
             return{
                 ...state,
                 contacts
+            }
+        }
+        case COLLECT_GUIDS : {
+            return{
+                ...state,
+                guids: action.guids
+            }
+        }
+        case DELETE_CONTACTS : {
+            let guids = [...state.guids];
+            let contacts = [...state.contacts];
+            for(let i in guids){
+                for (let j in contacts) {
+                    if (guids[i] === contacts[j].GuID) {
+                        contacts.splice(j, 1)
+                    }
+                }
+            }
+            return{
+                ...state,
+                contacts : contacts,
+                guids: action.guids
             }
         }
         default: {

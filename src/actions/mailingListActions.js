@@ -4,7 +4,8 @@ import {
     MAILING_LISTS,
     GET_MAILING_LISTS,
     SET_ACTIVE_MAILING_LIST,
-    DELETE_MAILING_LIST
+    DELETE_MAILING_LIST,
+    DELETE_MAILING_LIST_CONTACTS
 } from '../constants';
 
 export function toggleMailingListForm(toggle) {
@@ -12,7 +13,23 @@ export function toggleMailingListForm(toggle) {
         type: TOGGLE_MAILING_LIST_FORM,
         toggle
     }
-}
+};
+export const  deleteMailingListContacts = (activeMailingListContacts, guids) => dispatch => {
+    fetch('http://crmbetc.azurewebsites.net/api/contacts', {
+        method: "DELETE",
+        headers: {'Accept': 'application/json', 'Content-Type': "application/json"},
+        body: JSON.stringify(guids),
+    }).then(response => {
+        if (response.ok) {
+            dispatch({
+                type: DELETE_MAILING_LIST_CONTACTS,
+                activeMailingListContacts,
+                guids
+
+            })
+        }
+    });
+};
 export const createMailingList = (mailingListName) => (dispatch) => {
     fetch('http://crmbetc.azurewebsites.net/api/emaillists', {
         method: "POST",
@@ -32,7 +49,7 @@ export const createMailingList = (mailingListName) => (dispatch) => {
         type: CREATE_MAILING_LIST,
         responseMessage: "Mailing List has been created"
     }))
-}
+};
 export const getMailingLists = () => (dispatch) => {
     fetch('http://crmbetc.azurewebsites.net/api/emaillists').then(res => res.json()).then(res =>
         dispatch({
@@ -41,14 +58,14 @@ export const getMailingLists = () => (dispatch) => {
         })
     )
 
-}
+};
 
 export const toggleMailingLists = (toggle) => {
     return {
         type: MAILING_LISTS,
         toggle
     }
-}
+};
 
 export const setActiveMailingList = (id) => (dispatch) => {
     fetch(`http://crmbetc.azurewebsites.net/api/emaillists?id=${id}`).then(res => res.json()).then(res =>
@@ -57,7 +74,7 @@ export const setActiveMailingList = (id) => (dispatch) => {
             activeMailingList: res,
         })
     )
-}
+};
 
 export const deleteMailingList = (id,index) => (dispatch) => {
     fetch(`http://crmbetc.azurewebsites.net/api/emaillists?id=${id}`, {
@@ -66,4 +83,4 @@ export const deleteMailingList = (id,index) => (dispatch) => {
             type: DELETE_MAILING_LIST,
             index
         }))
-}
+};

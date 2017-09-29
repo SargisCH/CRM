@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getContacts, addContacts, editContact } from '../actions/contactsActions'
+import { getContacts, addContacts, editContact, collectGuIDs } from '../actions/contactsActions'
 import ContactsListItem from '../components/ContactsListItem';
 import Popup from './../components/popup/Popup';
 import AddComponentPopup from '../components/popup/AddComponentPopup';
 import EditContactPopup from '../components/popup/EditContactPopup';
 import AddContactButton from '../components/AddContatcButton';
 import CreateMailingListButton from '../components/CreateMailingListButton';
+import DeleteContacts from '../components/DeleteContacts'
 class Contacts extends Component {
     constructor(props) {
         super(props);
@@ -19,7 +20,7 @@ class Contacts extends Component {
     renderContacts() {
         const { contacts } = this.props;
         return contacts.map((item, index) => {
-            return <ContactsListItem key={item.GuID} dispatch={this.props.dispatch} index={index} contact={item} />
+            return <ContactsListItem key={item.GuID} dispatch={this.props.dispatch} index={index} contacts={this.props.contacts} contact={item} guids={this.props.guids} />
         })
     }
     addContact( firstname,lastname,position,companyName, country, email){
@@ -71,6 +72,7 @@ class Contacts extends Component {
                 <div className="buttons">
                     <AddContactButton dispatch={this.props.dispatch} />
                     <CreateMailingListButton dispatch={this.props.dispatch}/>
+                    <DeleteContacts dispatch={this.props.dispatch} contacts={this.props.contacts} guids={this.props.guids}/>
                 </div>
                 
                 {this.props.addContactFormIsOpen &&
@@ -96,7 +98,8 @@ function mapStateToProps(state) {
         editObject: state.contactsReducer.editObject,
         addContactFormIsOpen: state.UI.addContactFormIsOpen,
         editFormIsOpen: state.UI.editFormIsOpen,
-    
+        guids: state.contactsReducer.guids
+
     }
 }
 

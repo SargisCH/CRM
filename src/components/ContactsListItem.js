@@ -1,10 +1,14 @@
 import React from 'react';
-import {toggleEditContactForm} from '../actions/contactsActions'
+import {toggleEditContactForm, collectGuIDs} from '../actions/contactsActions'
 
-export default function ContactsListItem ({contact, dispatch, index}){
+export default function ContactsListItem ({contact, dispatch, index, contacts, guids}){
      return (
         <tr>
-            <td><input type="checkbox"/></td>
+            <td><input type="checkbox"
+                   onClick={(event) => {
+                       dispatch(collectGuIDs(index, event, contacts, guids))
+                   }}
+            /></td>
             <td>{contact["Full Name"]}</td>
             <td>{contact["Company Name"]}</td>
             <td>{contact["Position"]}</td>

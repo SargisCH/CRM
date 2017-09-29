@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import Contacts from './Contacts';
 import Header from '../components/Header';
 import Menu from '../components/Menu';
-
 import Popup from './../components/popup/Popup';
 import CreateMailingListPopup from '../components/popup/CreateMailingListPopup';
 import {createMailingList} from '../actions/mailingListActions';

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MailingListContactsItem from '../components/MailingListContactsItem'
+import DeleteContacts from '../components/DeleteContacts';
 class MailingListContacts extends Component {
      renderMailingListContacts(){
-        return this.props.activeMailingList.Contacts.map((item,index)=>{
-            return <MailingListContactsItem key={item.GuID} item={item} dispatch={this.props.dispatch}/>
+        return this.props.activeMailingListContacts.map((item,index)=>{
+            return <MailingListContactsItem key={item.GuID} item={item} index={index} dispatch={this.props.dispatch} contacts={this.props.contacts} guids={this.props.guids}/>
         })
     } 
     render() {
@@ -24,9 +25,10 @@ class MailingListContacts extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.renderMailingListContacts()} 
+                                {this.renderMailingListContacts()}
                             </tbody>
                         </table>
+                        <DeleteContacts dispatch={this.props.dispatch} contacts={this.props.activeMailingListContacts} guids={this.props.guids}/>
                     </div>
             </div> 
         )
@@ -36,6 +38,9 @@ class MailingListContacts extends Component {
 function mapStateToProps(state) {
     return {
         activeMailingList: state.mailingListsReducer.activeMailingList,
+        contacts: state.contactsReducer.contacts,
+        guids: state.contactsReducer.guids,
+        activeMailingListContacts: state.mailingListsReducer.activeMailingListContacts
         
     }
 }
